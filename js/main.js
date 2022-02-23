@@ -8,11 +8,9 @@ const getRundomNumber = (numberOne, numberTwo) => {
   numberOne = Math.ceil(numberOne);
   numberTwo = Math.floor(numberTwo);
   return Math.floor(Math.random() * (numberTwo - numberOne)) + numberOne;
-}
+};
 
-const checkMaxLength = (string, maxLength) => {
-  return string.length <= maxLength ? true : false;
-}
+const checkMaxLength = (string, maxLength) => string.length <= maxLength ? true : false
 
-getRundomNumber(10, 5)
-checkMaxLength("Here is the short string", 50)
+getRundomNumber(10, 5);
+checkMaxLength('Here is the short string', 50);
