@@ -10,7 +10,7 @@ const getRundomNumber = (numberOne, numberTwo) => {
   return Math.floor(Math.random() * (numberTwo - numberOne)) + numberOne;
 };
 
-const checkMaxLength = (string, maxLength) => string.length <= maxLength;
+const isAllowedString = (string, maxLength) => string.length <= maxLength;
 
 getRundomNumber(10, 5);
-checkMaxLength('Here is the short string', 140);
+isAllowedString('Here is the short string', 140);
