@@ -1,7 +1,7 @@
 const PHOTO_DESCRIPTIONS_COUNT = 25;
 const NUMBER_OF_COMMENTS = 5;
 
-const PHOTODESCRIPTIONS = [
+const PHOTO_DESCRIPTIONS = [
   'Красивое озеро',
   'Это старинный замой в Англии',
   'Я наконец в Лондоне!',
@@ -11,7 +11,7 @@ const PHOTODESCRIPTIONS = [
   'Пора садиться в поезд'
 ];
 
-const COMMENTSMESSAGES = [
+const COMMENTS_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -53,14 +53,14 @@ const getRandomArrayElement = (elements) => elements[getRundomNumber(0, elements
 const createComment = () => ({
   id: getRundomNumber(1, 100),
   avatar: `img/avatar-${  getRundomNumber(1, 6)  }.svg`,
-  message: getRandomArrayElement(COMMENTSMESSAGES),
+  message: getRandomArrayElement(COMMENTS_MESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
 const createPhotoDescription = (i) => ({
   id: i,
   url: `photos/${ i }.jpg`,
-  description: getRandomArrayElement(PHOTODESCRIPTIONS),
+  description: getRandomArrayElement(PHOTO_DESCRIPTIONS),
   likes: getRundomNumber(15, 200),
   comments: Array.from({length: NUMBER_OF_COMMENTS}, createComment),
 });
