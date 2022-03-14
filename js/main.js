@@ -1,20 +1,17 @@
 const PHOTO_DESCRIPTIONS_COUNT = 25;
-
 const NUMBER_OF_COMMENTS = 5;
 
-const IDS = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+const PHOTODESCRIPTIONS = [
+  'Красивое озеро',
+  'Это старинный замой в Англии',
+  'Я наконец в Лондоне!',
+  'Дружба кота и собаки',
+  'Закат на море',
+  'Посмотрите на эти пирожные!',
+  'Пора садиться в поезд'
 ];
 
-const DESCRIPTIONS = [
-  'This is a photo of the lake',
-  'This is a picture of the castle',
-  'Its me in London',
-  'Dog and cat',
-  'Sunset on the sea',
-];
-
-const MESSAGES = [
+const COMMENTSMESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -31,7 +28,9 @@ const NAMES = [
   'Иванушка Дурачок',
   'Илья Муромец',
   'Чингачгук',
-]
+];
+
+const ListPhotosDescriptions = [];
 
 const getRundomNumber = (numberOne, numberTwo) => {
   if(numberOne > numberTwo) {
@@ -47,27 +46,25 @@ const getRundomNumber = (numberOne, numberTwo) => {
 
 const isAllowedString = (string, maxLength) => string.length <= maxLength;
 
-const getRandomArrayElement = (elements) => elements[getRundomNumber(0, elements.length - 1)];
+isAllowedString('Это не очень длинная строка', 140);
+
+const getRandomArrayElement = (elements) => elements[getRundomNumber(0, elements.length)];
 
 const createComment = () => ({
   id: getRundomNumber(1, 100),
   avatar: `img/avatar-${  getRundomNumber(1, 6)  }.svg`,
-  message: getRandomArrayElement(MESSAGES),
+  message: getRandomArrayElement(COMMENTSMESSAGES),
   name: getRandomArrayElement(NAMES),
 });
 
 const createPhotoDescription = (i) => ({
-  id: IDS[i],
-  url: `photos/${  IDS[i]  }.jpg`,
-  description: getRandomArrayElement(DESCRIPTIONS),
+  id: i,
+  url: `photos/${ i }.jpg`,
+  description: getRandomArrayElement(PHOTODESCRIPTIONS),
   likes: getRundomNumber(15, 200),
   comments: Array.from({length: NUMBER_OF_COMMENTS}, createComment),
 });
 
-
-getRundomNumber(10, 5);
-isAllowedString('Here is the short string', 140);
-
 for(let i = 0; i < PHOTO_DESCRIPTIONS_COUNT; i++) {
-  console.log(createPhotoDescription(i));
+  ListPhotosDescriptions.push(createPhotoDescription(i + 1));
 }
