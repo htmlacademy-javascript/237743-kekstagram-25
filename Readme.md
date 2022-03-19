@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Екатерина Клиндюк](https://up.htmlacademy.ru/javascript/25/user/237743).
-* Наставник: [Максим Петрищак](https://htmlacademy.ru/profile/maksim_petrishchak).
+* Наставник: [Олег Глущенко](https://htmlacademy.ru/profile/id305355).
 
 ---
 
