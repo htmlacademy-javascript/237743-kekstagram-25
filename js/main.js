@@ -1,1 +1,1 @@
-import './miniature.js';
+import './miniatures.js';
