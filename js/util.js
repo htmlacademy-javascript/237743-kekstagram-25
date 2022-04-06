@@ -14,4 +14,6 @@ const getRandomArrayElement = (elements) => elements[getRundomNumber(0, elements
 
 const isAllowedString = (string, maxLength) => string.length <= maxLength;
 
-export {getRundomNumber, isAllowedString, getRandomArrayElement};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey};
