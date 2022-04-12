@@ -57,7 +57,7 @@
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
                   <fieldset class="img-upload__effect-level  effect-level">
-                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="100%">
+                    <input class="effect-level__value" type="number" step="any" name="effect-level" value="100">
                     <div class="effect-level__slider"></div>
                   </fieldset>
 
@@ -76,10 +76,10 @@
                       </label>
                     </li>
                     <li class="effects__item">
-                      <input type="radio" class="effects__radio  visually-hidden" name="effect" idffect-chrome" value="chrome">
+                      <input type="radio" class="effects__radio  visually-hidden" name="effect" id="effect-chrome" value="chrome">
                       <label for="effect-chrome" class="effects__label">
                         <span class="effects__preview  effects__preview--chrome">Превью эффекта Хром</span>
-                        Хром="e
+                        Хром
                       </label>
                     </li>
                     <li class="effects__item">
@@ -115,8 +115,8 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" maxlength="20">
-                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"></textarea>
+                  <input class="text__hashtags" name="hashtags" placeholder="#ХэшТег" >
+                  <textarea class="text__description" name="description" placeholder="Ваш комментарий..." ></textarea>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
@@ -230,7 +230,7 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
-  <script src="pristine/pristine.js"></script>
+  <script src="./pristine/pristine.min.js"></script>
   <script src="./js/main.js" type="module"></script>
 </body>
 </html>
