@@ -1,7 +1,6 @@
 import { getRundomNumber, getRandomArrayElement } from './util.js';
+import {NUMBER_OF_COMMENTS, PHOTO_DESCRIPTIONS_COUNT } from './constants.js';
 
-const PHOTO_DESCRIPTIONS_COUNT = 25;
-const NUMBER_OF_COMMENTS = 5;
 const PHOTO_DESCRIPTIONS = [
   'Красивое озеро',
   'Это старинный замой в Англии',
@@ -11,6 +10,7 @@ const PHOTO_DESCRIPTIONS = [
   'Посмотрите на эти пирожные!',
   'Пора садиться в поезд'
 ];
+
 const COMMENTS_MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -19,6 +19,7 @@ const COMMENTS_MESSAGES = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
+
 const NAMES = [
   'Колобок',
   'Тур Хейердал',

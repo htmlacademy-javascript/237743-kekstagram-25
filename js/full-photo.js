@@ -1,15 +1,15 @@
 import { isEscapeKey } from './util.js';
 
 const body = document.querySelector('body');
-const fullPhoto = document.querySelector('.big-picture');
-const fullPhotoAddress = document.querySelector('.big-picture__img > img');
-const fullPhotoCloseElement = document.querySelector('.big-picture__cancel');
-const commentsCounterWrapper =  document.querySelector('.social__comment-count');
-const commentsCount = document.querySelector('.comments-count');
-const commentsLoader = document.querySelector('.comments-loader');
-const likeCount = document.querySelector('.likes-count');
-const socialComments = document.querySelector('.social__comments');
-const photoCaption = document.querySelector('.social__caption');
+const fullPhoto = body.querySelector('.big-picture');
+const fullPhotoAddress = fullPhoto.querySelector('.big-picture__img > img');
+const fullPhotoCloseElement = fullPhoto.querySelector('.big-picture__cancel');
+const commentsCounterWrapper =  fullPhoto.querySelector('.social__comment-count');
+const commentsCount = fullPhoto.querySelector('.comments-count');
+const commentsLoader = fullPhoto.querySelector('.comments-loader');
+const likeCount = fullPhoto.querySelector('.likes-count');
+const socialComments = fullPhoto.querySelector('.social__comments');
+const photoCaption = fullPhoto.querySelector('.social__caption');
 
 const onFullSizePhotoEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -18,9 +18,7 @@ const onFullSizePhotoEscKeydown = (evt) => {
   }
 };
 
-fullPhotoCloseElement.addEventListener('click', () => {
-  closeFullSizePhoto();
-});
+fullPhotoCloseElement.addEventListener('click', closeFullSizePhoto);
 
 function closeFullSizePhoto () {
   fullPhoto.classList.add('hidden');
@@ -34,16 +32,20 @@ const commentFragment = document.createDocumentFragment();
 const getCommentElements = (comments) => {
   for (const comment of comments) {
     const commentsItem = document.createElement('li');
-    commentsItem.classList.add('social__comment');
     const commentsItemImg = document.createElement('img');
+    const commentsItemParagraf = document.createElement('p');
+
+    commentsItem.classList.add('social__comment');
+
     commentsItemImg.classList.add('social__picture');
     commentsItemImg.src = comment.avatar;
     commentsItemImg.alt = comment.name;
     commentsItemImg.style.width = '35px';
     commentsItemImg.style.height = '35px';
-    const commentsItemParagraf = document.createElement('p');
+
     commentsItemParagraf.classList.add('social__text');
     commentsItemParagraf.textContent = comment.message;
+
     commentsItem.append(commentsItemImg);
     commentsItem.append(commentsItemParagraf);
     commentFragment.append(commentsItem);
