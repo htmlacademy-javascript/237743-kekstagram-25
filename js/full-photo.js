@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
 
-const body = document.querySelector('body');
+const body = document.body;
 const fullPhoto = body.querySelector('.big-picture');
 const fullPhotoAddress = fullPhoto.querySelector('.big-picture__img > img');
 const fullPhotoCloseElement = fullPhoto.querySelector('.big-picture__cancel');
