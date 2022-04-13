@@ -14,8 +14,6 @@ const scaleInput = form.querySelector('.scale__control--value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 const effectOriginalInput = form.querySelector('#effect-none');
 
-uploadForm.classList.remove('hidden');
-
 uploadFile.addEventListener('change', () => {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');

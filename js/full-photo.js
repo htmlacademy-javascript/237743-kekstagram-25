@@ -64,8 +64,6 @@ const renderFullPhoto = (src, likes, comments, description) => {
 
 const openFullSizePhoto = (src, likes, comments, description) => {
   fullPhoto.classList.remove('hidden');
-  commentsCounterWrapper.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
 
   renderFullPhoto(src, likes, comments, description);
