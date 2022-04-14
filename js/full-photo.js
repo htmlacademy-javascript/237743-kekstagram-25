@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util.js';
+import { SHOWING_COMMENTS_AT_A_TIME } from './constants.js';
 
 const body = document.body;
 const fullPhoto = body.querySelector('.big-picture');
@@ -6,6 +7,7 @@ const fullPhotoAddress = fullPhoto.querySelector('.big-picture__img > img');
 const fullPhotoCloseElement = fullPhoto.querySelector('.big-picture__cancel');
 const commentsCounterWrapper =  fullPhoto.querySelector('.social__comment-count');
 const commentsCount = fullPhoto.querySelector('.comments-count');
+const currentCommentsCount = fullPhoto.querySelector('.current_comments_count');
 const commentsLoader = fullPhoto.querySelector('.comments-loader');
 const likeCount = fullPhoto.querySelector('.likes-count');
 const socialComments = fullPhoto.querySelector('.social__comments');
@@ -62,7 +64,15 @@ const renderFullPhoto = (src, likes, comments, description) => {
   getCommentElements(comments);
 };
 
+const showLoaderBtn = (comments) => {
+  if(comments > SHOWING_COMMENTS_AT_A_TIME) {
+    commentsLoader.classList.remove('.hidden');
+  }
+};
+
 const openFullSizePhoto = (src, likes, comments, description) => {
+  commentsLoader.classList.add('hidden');
+  showLoaderBtn(comments);
   fullPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
 
