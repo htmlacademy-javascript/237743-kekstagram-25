@@ -6,15 +6,13 @@ const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
 const uploadForm = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('#upload-select-image');
 const uploadFile = form.querySelector('#upload-file');
-const body = document.querySelector('body');
+const body = document.body;
 const buttonCloseForm = form.querySelector('#upload-cancel');
 const textAreaInput =  form.querySelector('.text__description');
 const hashTagsInput = form.querySelector('.text__hashtags');
 const scaleInput = form.querySelector('.scale__control--value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 const effectOriginalInput = form.querySelector('#effect-none');
-
-uploadForm.classList.remove('hidden');
 
 uploadFile.addEventListener('change', () => {
   uploadForm.classList.remove('hidden');
