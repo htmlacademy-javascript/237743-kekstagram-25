@@ -13,11 +13,14 @@ const hashTagsInput = form.querySelector('.text__hashtags');
 const scaleInput = form.querySelector('.scale__control--value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 const effectOriginalInput = form.querySelector('#effect-none');
+const photoUploadPreview = form.querySelector('.img-upload__preview img');
 
 uploadFile.addEventListener('change', () => {
   uploadForm.classList.remove('hidden');
   body.classList.add('modal-open');
 
+  effectLevelInput.classList.add('hidden');
+  photoUploadPreview.style.filter = 'none';
 });
 
 const onFormPhotoEscKeydown = (evt) => {
