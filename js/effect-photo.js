@@ -1,7 +1,9 @@
-const effectsList = document.querySelector('.effects__list');
-const photoUploadPreview = document.querySelector('.img-upload__preview img');
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
+const form = document.querySelector('.img-upload__form');
+const effectsList = form.querySelector('.effects__list');
+const photoUploadPreview = form.querySelector('.img-upload__preview img');
+const effectLevelSlider = form.querySelector('.effect-level__slider');
+const effectLevelValue = form.querySelector('.effect-level__value');
+const effectLevelInput = form.querySelector('.img-upload__effect-level');
 
 noUiSlider.create(effectLevelSlider, {
   range: {
@@ -108,10 +110,10 @@ const LIST_PHOTO_EFFECT = {
 const effectsChangeHandler = (evt) => {
   photoUploadPreview.classList = '';
   if (evt.target.id === 'effect-none') {
-    effectLevelSlider.classList.add('hidden');
+    effectLevelInput.classList.add('hidden');
     photoUploadPreview.style.filter = 'none';
   } else {
-    effectLevelSlider.classList.remove('hidden');
+    effectLevelInput.classList.remove('hidden');
     effectLevelSlider.noUiSlider.updateOptions(LIST_PHOTO_EFFECT[evt.target.id].noUiSlider);
     photoUploadPreview.classList.add(`effects__preview--${LIST_PHOTO_EFFECT[evt.target.id].class}`);
   }
