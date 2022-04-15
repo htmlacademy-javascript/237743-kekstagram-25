@@ -119,7 +119,6 @@ const effectsChangeHandler = (evt) => {
 
 effectLevelSlider.noUiSlider.on('update', () => {
   const selectedEffect = effectsList.querySelector('input:checked').id;
-  console.log(effectLevelValue.value);
   effectLevelValue.value = effectLevelSlider.noUiSlider.get();
   photoUploadPreview.style.filter = `${LIST_PHOTO_EFFECT[selectedEffect].filter}(${effectLevelSlider.noUiSlider.get()}${LIST_PHOTO_EFFECT[selectedEffect].unit})`;
 });
