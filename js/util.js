@@ -40,4 +40,11 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert};
+const onEscKeydown = (evt, escFunction) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    escFunction();
+  }
+};
+
+export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, onEscKeydown};
