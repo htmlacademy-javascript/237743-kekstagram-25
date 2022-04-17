@@ -1,4 +1,5 @@
 import { isEscapeKey, isAllowedString } from './util.js';
+import { sendData } from './api.js';
 import { HASHTAGS_REGULAR_EXPRESSION, COMMENT_MAX_LENGTH, HASHTAGS_MAX_COUNT, HASHTAGS_MAX_LENGTH } from './constants.js';
 
 const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
@@ -14,6 +15,20 @@ const scaleInput = form.querySelector('.scale__control--value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 const effectOriginalInput = form.querySelector('#effect-none');
 const photoUploadPreview = form.querySelector('.img-upload__preview img');
+const btnSubmit = form.querySelector('.img-upload__submit');
+const successTemplate = document.querySelector('#success');
+const successContent = successTemplate.content.querySelector('.success');
+const uploadSuccessButton = successContent.querySelector('.success__button');
+
+const blockSubmitButton = () => {
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  btnSubmit.disabled = false;
+  btnSubmit.textContent = 'Опубликовать';
+};
 
 uploadFile.addEventListener('change', () => {
   uploadForm.classList.remove('hidden');
@@ -87,12 +102,40 @@ pristine.addValidator(hashTagsInput, checkHashTagLength, `Максимальна
 pristine.addValidator(textAreaInput, validateComment, `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов`);
 pristine.addValidator(uploadFile, validateUploadPhoto, 'Вам нужно загрузить фотографию');
 
+const closeSuccessForm = () => {
+
+  document.body.removeChild(successContent);
+  //document.removeEventListener('keyup', onModalEscPress(closeSuccessForm));
+
+  uploadSuccessButton.removeEventListener('click', closeSuccessForm);
+  //successTemplate.removeEventListener('click', closeSuccessForm);
+};
+
+const onSuccessForm = () => {
+  document.body.appendChild(successContent);
+
+  uploadSuccessButton.addEventListener('click', closeSuccessForm);
+};
+
+onSuccessForm();
+
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
   if (isValid) {
-    form.submit();
+    blockSubmitButton();
+    sendData(
+      () => {
+        onSuccessForm();
+        unblockSubmitButton();
+      },
+      () => {
+        //showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+        unblockSubmitButton();
+      },
+      new FormData(evt.target),
+    );
   }
 });
 
