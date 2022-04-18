@@ -1,4 +1,5 @@
-import { isEscapeKey, isAllowedString } from './util.js';
+import { isEscapeKey, isAllowedString, onEscKeydown } from './util.js';
+import { sendData } from './api.js';
 import { HASHTAGS_REGULAR_EXPRESSION, COMMENT_MAX_LENGTH, HASHTAGS_MAX_COUNT, HASHTAGS_MAX_LENGTH } from './constants.js';
 
 const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
@@ -14,6 +15,23 @@ const scaleInput = form.querySelector('.scale__control--value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 const effectOriginalInput = form.querySelector('#effect-none');
 const photoUploadPreview = form.querySelector('.img-upload__preview img');
+const btnSubmit = form.querySelector('.img-upload__submit');
+const successTemplate = document.querySelector('#success');
+const successContent = successTemplate.content.querySelector('.success');
+const uploadSuccessButton = successContent.querySelector('.success__button');
+const errorTemplate = document.querySelector('#error');
+const errorContent = errorTemplate.content.querySelector('.error');
+const uploadErrorButton = errorContent.querySelector('.error__button');
+
+const blockSubmitButton = () => {
+  btnSubmit.disabled = true;
+  btnSubmit.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  btnSubmit.disabled = false;
+  btnSubmit.textContent = 'Опубликовать';
+};
 
 uploadFile.addEventListener('change', () => {
   uploadForm.classList.remove('hidden');
@@ -24,10 +42,7 @@ uploadFile.addEventListener('change', () => {
 });
 
 const onFormPhotoEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeForm();
-  }
+  onEscKeydown(evt, closeForm);
 };
 
 function closeForm () {
@@ -87,12 +102,67 @@ pristine.addValidator(hashTagsInput, checkHashTagLength, `Максимальна
 pristine.addValidator(textAreaInput, validateComment, `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов`);
 pristine.addValidator(uploadFile, validateUploadPhoto, 'Вам нужно загрузить фотографию');
 
+const onSuccessEscKeydown = (evt) => {
+  onEscKeydown(evt, closeSuccessForm);
+};
+
+const onErrorEscKeydown = (evt) => {
+  onEscKeydown(evt, closeErrorForm);
+};
+
+function closeSuccessForm() {
+  document.body.removeChild(successContent);
+
+  uploadSuccessButton.removeEventListener('click', closeSuccessForm);
+  document.removeEventListener('keydown', onSuccessEscKeydown);
+  successContent.removeEventListener('click', closeSuccessForm);
+}
+
+const onSuccessForm = () => {
+  body.appendChild(successContent);
+
+  successContent.addEventListener('click', closeSuccessForm);
+  document.addEventListener('keydown', onSuccessEscKeydown);
+  uploadSuccessButton.addEventListener('click', closeSuccessForm);
+
+  closeForm();
+};
+
+function closeErrorForm() {
+  body.removeChild(errorContent);
+
+  document.removeEventListener('keydown', onErrorEscKeydown);
+  uploadErrorButton.removeEventListener('click', closeErrorForm);
+  errorContent.removeEventListener('click', closeErrorForm);
+}
+
+const onErrorForm = () => {
+  document.body.appendChild(errorContent);
+
+  errorContent.addEventListener('click', closeErrorForm);
+  uploadErrorButton.addEventListener('click', closeErrorForm);
+  document.addEventListener('keydown', closeErrorForm);
+
+  closeForm();
+};
+
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   const isValid = pristine.validate();
   if (isValid) {
-    form.submit();
+    blockSubmitButton();
+    sendData(
+      () => {
+        onSuccessForm();
+        unblockSubmitButton();
+      },
+      () => {
+        onErrorForm();
+        unblockSubmitButton();
+      },
+      new FormData(evt.target),
+    );
   }
 });
 
@@ -107,4 +177,3 @@ hashTagsInput.addEventListener('keydown', (evt) => {
     evt.stopPropagation();
   }
 });
-
