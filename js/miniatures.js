@@ -1,5 +1,6 @@
 import { openFullSizePhoto } from './full-photo.js';
 import { getData } from './api.js';
+import { filter } from './filters.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -20,4 +21,6 @@ const renderListPhoto = (listPhotos) => {
   picturesContainer.append(similarListFragment);
 };
 
-getData(renderListPhoto);
+getData(filter);
+
+export { renderListPhoto };
