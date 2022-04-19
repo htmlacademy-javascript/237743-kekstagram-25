@@ -5,27 +5,6 @@ const effectLevelSlider = form.querySelector('.effect-level__slider');
 const effectLevelValue = form.querySelector('.effect-level__value');
 const effectLevelInput = form.querySelector('.img-upload__effect-level');
 
-noUiSlider.create(effectLevelSlider, {
-  range: {
-    min: 0,
-    max: 1,
-  },
-  start: 1,
-  step: 0.1,
-  connect: 'lower',
-  format: {
-    to: (value) => {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
-    },
-    from: (value) => (
-      parseFloat(value)
-    ),
-  }
-});
-
 const LIST_PHOTO_EFFECT = {
   'effect-none': {
     filter: 'none',
@@ -106,6 +85,27 @@ const LIST_PHOTO_EFFECT = {
     }
   }
 };
+
+noUiSlider.create(effectLevelSlider, {
+  range: {
+    min: 0,
+    max: 1,
+  },
+  start: 1,
+  step: 0.1,
+  connect: 'lower',
+  format: {
+    to: (value) => {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: (value) => (
+      parseFloat(value)
+    ),
+  }
+});
 
 const effectsChangeHandler = (evt) => {
   photoUploadPreview.classList = '';

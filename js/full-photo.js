@@ -80,7 +80,6 @@ const renderFullPhoto = (src, likes, comments, description) => {
   shownCommentsCount += SHOWING_COMMENTS_AT_A_TIME;
 };
 
-
 const openFullSizePhoto = (src, likes, comments, description) => {
   totalCommentList = comments;
   totalCommentListLength = totalCommentList.length;

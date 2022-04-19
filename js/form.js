@@ -2,8 +2,6 @@ import { isEscapeKey, isAllowedString, onEscKeydown } from './util.js';
 import { sendData } from './api.js';
 import { HASHTAGS_REGULAR_EXPRESSION, COMMENT_MAX_LENGTH, HASHTAGS_MAX_COUNT, HASHTAGS_MAX_LENGTH } from './constants.js';
 
-const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
-
 const uploadForm = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('#upload-select-image');
 const uploadFile = form.querySelector('#upload-file');
@@ -22,6 +20,8 @@ const uploadSuccessButton = successContent.querySelector('.success__button');
 const errorTemplate = document.querySelector('#error');
 const errorContent = errorTemplate.content.querySelector('.error');
 const uploadErrorButton = errorContent.querySelector('.error__button');
+
+const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
 
 const blockSubmitButton = () => {
   btnSubmit.disabled = true;
@@ -55,7 +55,6 @@ function closeForm () {
   scaleInput.value = '100%';
   effectLevelInput.value = '100%';
   effectOriginalInput.checked = 'true';
-
 
   document.removeEventListener('keydown', onFormPhotoEscKeydown);
 }
