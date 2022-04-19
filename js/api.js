@@ -1,17 +1,17 @@
 import { showAlert } from './util.js';
 
-const getData = (onSuccess) => {
+const getData = (success) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
-    .then((photos) => {
-      onSuccess(photos);
+    .then((photo) => {
+      success(photo);
     })
     .catch(() => {
       showAlert('Не удалось загрузить фотографии. Попробуйте ещё раз');
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (success, fail, body) => {
   fetch(
     'https://25.javascript.pages.academy/kekstagram',
     {
@@ -24,13 +24,13 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
+        success();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        fail('Не удалось отправить форму. Попробуйте ещё раз');
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      fail('Не удалось отправить форму. Попробуйте ещё раз');
     });
 };
 

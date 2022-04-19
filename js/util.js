@@ -1,4 +1,4 @@
-import { ALERT_SHOW_TIME } from './constants.js';
+import { ALERT_TIME } from './constants.js';
 
 const getRundomNumber = (numberOne, numberTwo) => {
   if(numberOne > numberTwo) {
@@ -20,12 +20,12 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
+  alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
+  alertContainer.style.left = '0';
   alertContainer.style.top = '50%';
   alertContainer.style.transform = 'translateY(-50%)';
-  alertContainer.style.right = 0;
+  alertContainer.style.right = '0';
   alertContainer.style.padding = '50px 3px';
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
@@ -37,14 +37,14 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, ALERT_SHOW_TIME);
+  }, ALERT_TIME);
 };
 
-const onEscKeydown = (evt, escFunction) => {
+const clickEscKeydown = (evt, escFunction) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     escFunction();
   }
 };
 
-export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, onEscKeydown};
+export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, clickEscKeydown};

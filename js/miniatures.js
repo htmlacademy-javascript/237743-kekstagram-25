@@ -2,9 +2,7 @@ import { openFullSizePhoto } from './full-photo.js';
 import { getData } from './api.js';
 
 const picturesContainer = document.querySelector('.pictures');
-
 const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 const similarListFragment = document.createDocumentFragment();
 
 const renderListPhoto = (listPhotos) => {
@@ -23,5 +21,3 @@ const renderListPhoto = (listPhotos) => {
 };
 
 getData(renderListPhoto);
-
-

@@ -5,12 +5,15 @@ const btnScaleMakeSmaller = scalePhotoWrapper.querySelector('.scale__control--sm
 const btnScaleMakeBigger = scalePhotoWrapper.querySelector('.scale__control--bigger');
 const photo = form.querySelector('.img-upload__preview > img');
 
+const scaleStep = 25;
+const minValueScale = 25;
+const maxValueScale = 100;
 let scaleValue = 100;
 
 btnScaleMakeSmaller.addEventListener('click', () => {
-  scaleValue -= 25;
-  if (scaleValue < 25) {
-    scaleValue = 25;
+  scaleValue -= scaleStep;
+  if (scaleValue < minValueScale) {
+    scaleValue = minValueScale;
   }
 
   photo.style.transform  = `scale(${(scaleValue / 100)})`;
@@ -18,9 +21,9 @@ btnScaleMakeSmaller.addEventListener('click', () => {
 });
 
 btnScaleMakeBigger.addEventListener('click', () => {
-  scaleValue += 25;
-  if (scaleValue > 100) {
-    scaleValue = 100;
+  scaleValue += scaleStep;
+  if (scaleValue > maxValueScale) {
+    scaleValue = maxValueScale;
   }
 
   photo.style.transform  = `scale(${(scaleValue / 100)})`;
