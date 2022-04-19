@@ -1,5 +1,5 @@
 import { isEscapeKey } from './util.js';
-import { SHOWING_COMMENTS_AT_A_TIME } from './constants.js';
+import { COMMENTS_PORTION } from './constants.js';
 
 const body = document.body;
 const fullPhoto = body.querySelector('.big-picture');
@@ -13,7 +13,7 @@ const socialComments = fullPhoto.querySelector('.social__comments');
 const photoCaption = fullPhoto.querySelector('.social__caption');
 
 let shownCommentsCount = 0;
-let totalCommentList = [];
+let totalCommentsList = [];
 let totalCommentListLength = 0;
 
 const onFullSizePhotoEscKeydown = (evt) => {
@@ -26,7 +26,7 @@ const onFullSizePhotoEscKeydown = (evt) => {
 fullPhotoCloseElement.addEventListener('click', closeFullSizePhoto);
 
 const fillPhotoComments = (comments) => {
-  const commentsListPortion = comments.slice(shownCommentsCount, shownCommentsCount + SHOWING_COMMENTS_AT_A_TIME).reduce((commentsHtml, commentId) => {
+  const commentsListPortion = comments.slice(shownCommentsCount, shownCommentsCount + COMMENTS_PORTION).reduce((commentsHtml, commentId) => {
     commentsHtml += `<li class="social__comment">
       <img class="social__picture" src="${commentId.avatar}" alt="${commentId.name}" width="35px" height="35px">
       <p class="social__text">${commentId.message}</p>
@@ -39,8 +39,8 @@ const fillPhotoComments = (comments) => {
 const onCommentsLoaderClick = (evt) => {
   evt.preventDefault();
 
-  fillPhotoComments(totalCommentList);
-  shownCommentsCount += SHOWING_COMMENTS_AT_A_TIME;
+  fillPhotoComments(totalCommentsList);
+  shownCommentsCount += COMMENTS_PORTION;
   currentCommentsCount.textContent = shownCommentsCount.toString();
 
   if (totalCommentListLength <= shownCommentsCount) {
@@ -71,18 +71,18 @@ const renderFullPhoto = (src, likes, comments, description) => {
 
   fillPhotoComments(comments);
 
-  if (totalCommentListLength <= SHOWING_COMMENTS_AT_A_TIME) {
+  if (totalCommentListLength <= COMMENTS_PORTION) {
     currentCommentsCount.textContent = totalCommentListLength.toString();
     currentCommentsCount.classList.add('hidden');
   } else {
-    currentCommentsCount.textContent = SHOWING_COMMENTS_AT_A_TIME.toString();
+    currentCommentsCount.textContent = COMMENTS_PORTION.toString();
   }
-  shownCommentsCount += SHOWING_COMMENTS_AT_A_TIME;
+  shownCommentsCount += COMMENTS_PORTION;
 };
 
 const openFullSizePhoto = (src, likes, comments, description) => {
-  totalCommentList = comments;
-  totalCommentListLength = totalCommentList.length;
+  totalCommentsList = comments;
+  totalCommentListLength = totalCommentsList.length;
 
   fullPhoto.classList.remove('hidden');
   body.classList.add('modal-open');

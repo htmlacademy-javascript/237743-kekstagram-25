@@ -1,4 +1,4 @@
-import { ALERT_SHOW_TIME } from './constants.js';
+import { ALERT_TIME } from './constants.js';
 
 const getRundomNumber = (numberOne, numberTwo) => {
   if(numberOne > numberTwo) {
@@ -37,14 +37,14 @@ const showAlert = (message) => {
 
   setTimeout(() => {
     alertContainer.remove();
-  }, ALERT_SHOW_TIME);
+  }, ALERT_TIME);
 };
 
-const onEscKeydown = (evt, escFunction) => {
+const clickEscKeydown = (evt, escFunction) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     escFunction();
   }
 };
 
-export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, onEscKeydown};
+export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, clickEscKeydown};

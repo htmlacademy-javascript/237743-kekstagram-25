@@ -1,6 +1,6 @@
-import { isEscapeKey, isAllowedString, onEscKeydown } from './util.js';
+import { isEscapeKey, isAllowedString, clickEscKeydown } from './util.js';
 import { sendData } from './api.js';
-import { HASHTAGS_REGULAR_EXPRESSION, COMMENT_MAX_LENGTH, HASHTAGS_MAX_COUNT, HASHTAGS_MAX_LENGTH } from './constants.js';
+import { HASHTAG_REGULAR_EXPRESSION, COMMENT_MAX_LENGTH, HASHTAG_MAX_COUNT, HASHTAG_MAX_LENGTH } from './constants.js';
 
 const uploadForm = document.querySelector('.img-upload__overlay');
 const form = document.querySelector('#upload-select-image');
@@ -21,14 +21,14 @@ const errorTemplate = document.querySelector('#error');
 const errorContent = errorTemplate.content.querySelector('.error');
 const uploadErrorButton = errorContent.querySelector('.error__button');
 
-const hashtagValidateRegExp = new RegExp(HASHTAGS_REGULAR_EXPRESSION);
+const hashtagValidateRegExp = new RegExp(HASHTAG_REGULAR_EXPRESSION);
 
 const blockSubmitButton = () => {
   btnSubmit.disabled = true;
   btnSubmit.textContent = 'Публикую...';
 };
 
-const unblockSubmitButton = () => {
+const removeBlockSubmitButton = () => {
   btnSubmit.disabled = false;
   btnSubmit.textContent = 'Опубликовать';
 };
@@ -41,8 +41,8 @@ uploadFile.addEventListener('change', () => {
   photoUploadPreview.style.filter = 'none';
 });
 
-const onFormPhotoEscKeydown = (evt) => {
-  onEscKeydown(evt, closeForm);
+const clickFormPhotoEscKeydown = (evt) => {
+  clickEscKeydown(evt, closeForm);
 };
 
 function closeForm () {
@@ -56,11 +56,11 @@ function closeForm () {
   effectLevelInput.value = '100%';
   effectOriginalInput.checked = 'true';
 
-  document.removeEventListener('keydown', onFormPhotoEscKeydown);
+  document.removeEventListener('keydown', clickFormPhotoEscKeydown);
 }
 
 buttonCloseForm.addEventListener('click', closeForm);
-document.addEventListener('keydown', onFormPhotoEscKeydown);
+document.addEventListener('keydown', clickFormPhotoEscKeydown);
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
@@ -72,7 +72,7 @@ const pristine = new Pristine(form, {
 
 const getHashTagArray = (hashTagText) => hashTagText.toLowerCase().split(' ').filter((el) => el);
 
-const checkHashtagsAmount = (value) => getHashTagArray(value).length <= HASHTAGS_MAX_COUNT;
+const checkHashtagsAmount = (value) => getHashTagArray(value).length <= HASHTAG_MAX_COUNT;
 
 const checkDuplicateHashtags = (value) => {
   const hashtagsArray = getHashTagArray(value);
@@ -80,7 +80,7 @@ const checkDuplicateHashtags = (value) => {
   return uniqueHashtags.size === hashtagsArray.length;
 };
 
-const checkHashTagLength = (value) => getHashTagArray(value).every((hashtag) => hashtag.length <= HASHTAGS_MAX_LENGTH);
+const checkHashTagLength = (value) => getHashTagArray(value).every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
 
 const validateComment = (value) => (
   isAllowedString(value, COMMENT_MAX_LENGTH)
@@ -94,19 +94,19 @@ const checkCorrectHashtags = (value) => {
 
 const validateUploadPhoto = () => uploadFile.value;
 
-pristine.addValidator(hashTagsInput, checkHashtagsAmount, `Нельзя указать больше ${HASHTAGS_MAX_COUNT} хэш-тегов`);
+pristine.addValidator(hashTagsInput, checkHashtagsAmount, `Нельзя указать больше ${HASHTAG_MAX_COUNT} хэш-тегов`);
 pristine.addValidator(hashTagsInput, checkDuplicateHashtags, 'Один и тот же хэш-тег не может быть использован дважды');
 pristine.addValidator(hashTagsInput, checkCorrectHashtags, 'Хэштег должен начинаться с "#" и содержать буквы и числа');
-pristine.addValidator(hashTagsInput, checkHashTagLength, `Максимальная длина одного хэш-тега ${HASHTAGS_MAX_LENGTH} символов, включая решетку`);
+pristine.addValidator(hashTagsInput, checkHashTagLength, `Максимальная длина одного хэш-тега ${HASHTAG_MAX_LENGTH} символов, включая решетку`);
 pristine.addValidator(textAreaInput, validateComment, `Длина комментария не может составлять больше ${COMMENT_MAX_LENGTH} символов`);
 pristine.addValidator(uploadFile, validateUploadPhoto, 'Вам нужно загрузить фотографию');
 
 const onSuccessEscKeydown = (evt) => {
-  onEscKeydown(evt, closeSuccessForm);
+  clickEscKeydown(evt, closeSuccessForm);
 };
 
 const onErrorEscKeydown = (evt) => {
-  onEscKeydown(evt, closeErrorForm);
+  clickEscKeydown(evt, closeErrorForm);
 };
 
 function closeSuccessForm() {
@@ -154,11 +154,11 @@ form.addEventListener('submit', (evt) => {
     sendData(
       () => {
         onSuccessForm();
-        unblockSubmitButton();
+        removeBlockSubmitButton();
       },
       () => {
         onErrorForm();
-        unblockSubmitButton();
+        removeBlockSubmitButton();
       },
       new FormData(evt.target),
     );

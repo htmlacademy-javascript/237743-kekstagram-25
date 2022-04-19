@@ -1,9 +1,9 @@
 const form = document.querySelector('.img-upload__form');
-const effectsList = form.querySelector('.effects__list');
-const photoUploadPreview = form.querySelector('.img-upload__preview img');
-const effectLevelSlider = form.querySelector('.effect-level__slider');
-const effectLevelValue = form.querySelector('.effect-level__value');
-const effectLevelInput = form.querySelector('.img-upload__effect-level');
+const effectList = form.querySelector('.effects__list');
+const photoPreview = form.querySelector('.img-upload__preview img');
+const effectSlider = form.querySelector('.effect-level__slider');
+const effectValue = form.querySelector('.effect-level__value');
+const effectInput = form.querySelector('.img-upload__effect-level');
 
 const LIST_PHOTO_EFFECT = {
   'effect-none': {
@@ -86,7 +86,7 @@ const LIST_PHOTO_EFFECT = {
   }
 };
 
-noUiSlider.create(effectLevelSlider, {
+noUiSlider.create(effectSlider, {
   range: {
     min: 0,
     max: 1,
@@ -108,21 +108,21 @@ noUiSlider.create(effectLevelSlider, {
 });
 
 const effectsChangeHandler = (evt) => {
-  photoUploadPreview.classList = '';
+  photoPreview.classList = '';
   if (evt.target.id === 'effect-none') {
-    effectLevelInput.classList.add('hidden');
-    photoUploadPreview.style.filter = 'none';
+    effectInput.classList.add('hidden');
+    photoPreview.style.filter = 'none';
   } else {
-    effectLevelInput.classList.remove('hidden');
-    effectLevelSlider.noUiSlider.updateOptions(LIST_PHOTO_EFFECT[evt.target.id].noUiSlider);
-    photoUploadPreview.classList.add(`effects__preview--${LIST_PHOTO_EFFECT[evt.target.id].class}`);
+    effectInput.classList.remove('hidden');
+    effectSlider.noUiSlider.updateOptions(LIST_PHOTO_EFFECT[evt.target.id].noUiSlider);
+    photoPreview.classList.add(`effects__preview--${LIST_PHOTO_EFFECT[evt.target.id].class}`);
   }
 };
 
-effectLevelSlider.noUiSlider.on('update', () => {
-  const selectedEffect = effectsList.querySelector('input:checked').id;
-  effectLevelValue.value = effectLevelSlider.noUiSlider.get();
-  photoUploadPreview.style.filter = `${LIST_PHOTO_EFFECT[selectedEffect].filter}(${effectLevelSlider.noUiSlider.get()}${LIST_PHOTO_EFFECT[selectedEffect].unit})`;
+effectSlider.noUiSlider.on('update', () => {
+  const selectedEffect = effectList.querySelector('input:checked').id;
+  effectValue.value = effectSlider.noUiSlider.get();
+  photoPreview.style.filter = `${LIST_PHOTO_EFFECT[selectedEffect].filter}(${effectSlider.noUiSlider.get()}${LIST_PHOTO_EFFECT[selectedEffect].unit})`;
 });
 
-effectsList.addEventListener('change', effectsChangeHandler);
+effectList.addEventListener('change', effectsChangeHandler);
