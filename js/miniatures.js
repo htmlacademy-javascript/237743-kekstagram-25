@@ -7,6 +7,9 @@ const miniatureTemplate = document.querySelector('#picture').content.querySelect
 const similarListFragment = document.createDocumentFragment();
 
 const renderListPhoto = (listPhotos) => {
+
+  console.log(picturesContainer.querySelectorAll('.picture').length);
+
   listPhotos.forEach(({url, likes, comments, description }) => {
     const miniatureElement = miniatureTemplate.cloneNode(true);
     miniatureElement.querySelector('img').src = url;
@@ -16,10 +19,14 @@ const renderListPhoto = (listPhotos) => {
     miniatureElement.addEventListener('click', () => {
       openFullSizePhoto(url, likes, comments, description);
     });
+    picturesContainer.append(similarListFragment);
+
   });
 
-  picturesContainer.append(similarListFragment);
+
 };
+
+// getData(renderListPhoto);
 
 getData(filter);
 
