@@ -1,5 +1,4 @@
 import { openFullSizePhoto } from './full-photo.js';
-import { getData } from './api.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -15,9 +14,9 @@ const renderListPhoto = (listPhotos) => {
     miniatureElement.addEventListener('click', () => {
       openFullSizePhoto(url, likes, comments, description);
     });
-  });
 
-  picturesContainer.append(similarListFragment);
+    picturesContainer.append(similarListFragment);
+  });
 };
 
-getData(renderListPhoto);
+export { renderListPhoto };
