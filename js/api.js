@@ -1,13 +1,10 @@
 import { showAlert } from './util.js';
 
-const userFiltersElement = document.querySelector('.img-filters');
-
 const getData = (success) => {
   fetch('https://25.javascript.pages.academy/kekstagram/data')
     .then((response) => response.json())
     .then((photo) => {
       success(photo);
-      userFiltersElement.classList.remove('img-filters--inactive');
     })
     .catch(() => {
       showAlert('Не удалось загрузить фотографии. Попробуйте ещё раз');

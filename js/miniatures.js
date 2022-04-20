@@ -1,13 +1,10 @@
 import { openFullSizePhoto } from './full-photo.js';
-import { getData } from './api.js';
-import { filter } from './filters.js';
 
 const picturesContainer = document.querySelector('.pictures');
 const miniatureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const similarListFragment = document.createDocumentFragment();
 
 const renderListPhoto = (listPhotos) => {
-
   listPhotos.forEach(({url, likes, comments, description }) => {
     const miniatureElement = miniatureTemplate.cloneNode(true);
     miniatureElement.querySelector('img').src = url;
@@ -20,12 +17,6 @@ const renderListPhoto = (listPhotos) => {
     picturesContainer.append(similarListFragment);
 
   });
-
-
 };
-
-// getData(renderListPhoto);
-
-getData(filter);
 
 export { renderListPhoto };
