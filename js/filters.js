@@ -1,4 +1,5 @@
 import { renderListPhoto } from './miniatures.js';
+import { getRundomNumber } from './util.js';
 
 const userFiltersElement = document.querySelector('.img-filters');
 const userFiltersButtons = document.querySelectorAll('.img-filters__button');
@@ -38,7 +39,6 @@ const filter = (listItems) => {
         evt.target.classList.add('img-filters__button--active');
     }
     renderListPhoto(sortedData);
-
 
   });
 };

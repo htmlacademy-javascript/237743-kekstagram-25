@@ -8,8 +8,6 @@ const similarListFragment = document.createDocumentFragment();
 
 const renderListPhoto = (listPhotos) => {
 
-  console.log(picturesContainer.querySelectorAll('.picture').length);
-
   listPhotos.forEach(({url, likes, comments, description }) => {
     const miniatureElement = miniatureTemplate.cloneNode(true);
     miniatureElement.querySelector('img').src = url;
