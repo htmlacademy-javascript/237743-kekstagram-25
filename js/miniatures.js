@@ -14,8 +14,8 @@ const renderListPhoto = (listPhotos) => {
     miniatureElement.addEventListener('click', () => {
       openFullSizePhoto(url, likes, comments, description);
     });
-    picturesContainer.append(similarListFragment);
 
+    picturesContainer.append(similarListFragment);
   });
 };
 
