@@ -14,6 +14,18 @@ const getRundomNumber = (numberOne, numberTwo) => {
 
 const getRandomArrayElement = (elements) => elements[getRundomNumber(0, elements.length)];
 
+const getRandomArray = (elements, length) => {
+  const newElements = [];
+  for (let i = 0; i < length; i++) {
+    const element = getRandomArrayElement(elements);
+    newElements.push(element);
+    const elementIndex = elements.indexOf(element);
+    elements.splice(elementIndex, 1);
+  }
+
+  return newElements;
+};
+
 const isAllowedString = (string, maxLength) => string.length <= maxLength;
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
@@ -47,4 +59,12 @@ const clickEscKeydown = (evt, escFunction) => {
   }
 };
 
-export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, clickEscKeydown};
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {getRundomNumber, isAllowedString, getRandomArrayElement, isEscapeKey, showAlert, clickEscKeydown, debounce, getRandomArray};
