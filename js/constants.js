@@ -5,7 +5,7 @@ const HASHTAG_MAX_LENGTH = 20;
 const COMMENTS_PORTION = 5;
 const ALERT_TIME = 15000;
 const RERENDER_DELAY = 500;
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FILES_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const SCALE_STEP = 25;
 const MIN_VALUE_SCALE = 25;
 const MAX_VALUE_SCALE = 100;
@@ -17,7 +17,7 @@ export { HASHTAG_REGULAR_EXPRESSION,
   COMMENTS_PORTION,
   ALERT_TIME,
   RERENDER_DELAY,
-  FILE_TYPES,
+  FILES_TYPES,
   SCALE_STEP,
   MIN_VALUE_SCALE,
   MAX_VALUE_SCALE

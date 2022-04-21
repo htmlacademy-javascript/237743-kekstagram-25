@@ -1,10 +1,3 @@
-const form = document.querySelector('.img-upload__form');
-const effectList = form.querySelector('.effects__list');
-const photoPreview = form.querySelector('.img-upload__preview img');
-const effectSlider = form.querySelector('.effect-level__slider');
-const effectValue = form.querySelector('.effect-level__value');
-const effectInput = form.querySelector('.img-upload__effect-level');
-
 const LIST_PHOTO_EFFECT = {
   'effect-none': {
     filter: 'none',
@@ -85,6 +78,13 @@ const LIST_PHOTO_EFFECT = {
     }
   }
 };
+
+const form = document.querySelector('.img-upload__form');
+const effectList = form.querySelector('.effects__list');
+const photoPreview = form.querySelector('.img-upload__preview img');
+const effectSlider = form.querySelector('.effect-level__slider');
+const effectValue = form.querySelector('.effect-level__value');
+const effectInput = form.querySelector('.img-upload__effect-level');
 
 noUiSlider.create(effectSlider, {
   range: {
