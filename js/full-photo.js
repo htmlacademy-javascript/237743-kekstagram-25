@@ -13,7 +13,7 @@ const socialComments = fullPhoto.querySelector('.social__comments');
 const photoCaption = fullPhoto.querySelector('.social__caption');
 
 let shownCommentsCount = 0;
-let totalCommentsList = [];
+let totalCommentsLists = [];
 let totalCommentListLength = 0;
 
 const onFullSizePhotoEscKeydown = (evt) => {
@@ -39,7 +39,7 @@ const fillPhotoComments = (comments) => {
 const onCommentsLoaderClick = (evt) => {
   evt.preventDefault();
 
-  fillPhotoComments(totalCommentsList);
+  fillPhotoComments(totalCommentsLists);
   shownCommentsCount += COMMENTS_PORTION;
   currentCommentsCount.textContent = shownCommentsCount.toString();
 
@@ -81,8 +81,8 @@ const renderFullPhoto = (src, likes, comments, description) => {
 };
 
 const openFullSizePhoto = (src, likes, comments, description) => {
-  totalCommentsList = comments;
-  totalCommentListLength = totalCommentsList.length;
+  totalCommentsLists = comments;
+  totalCommentListLength = totalCommentsLists.length;
 
   fullPhoto.classList.remove('hidden');
   body.classList.add('modal-open');

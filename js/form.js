@@ -117,7 +117,7 @@ function closeSuccessForm() {
   successContent.removeEventListener('click', closeSuccessForm);
 }
 
-const onSuccessForm = () => {
+const sendSuccessForm = () => {
   body.appendChild(successContent);
 
   successContent.addEventListener('click', closeSuccessForm);
@@ -135,7 +135,7 @@ function closeErrorForm() {
   errorContent.removeEventListener('click', closeErrorForm);
 }
 
-const onErrorForm = () => {
+const sendErrorForm = () => {
   document.body.appendChild(errorContent);
 
   errorContent.addEventListener('click', closeErrorForm);
@@ -153,11 +153,11 @@ form.addEventListener('submit', (evt) => {
     blockSubmitButton();
     sendData(
       () => {
-        onSuccessForm();
+        sendSuccessForm();
         removeBlockSubmitButton();
       },
       () => {
-        onErrorForm();
+        sendErrorForm();
         removeBlockSubmitButton();
       },
       new FormData(evt.target),
